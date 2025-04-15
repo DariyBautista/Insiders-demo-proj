@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Кабінет користувача</title>
+</head>
+<body>
+    <h1>👋 Привіт, {{ user.first_name|default:user.username }}!</h1>
+
+    <p>Радий тебе бачити у своєму кабінеті!</p>
+
+    <ul>
+        <li><a href="{% url 'admin:index' %}">🔧 Admin</a></li>
+        <li><a href="/mailer/">📧 Розсилки</a></li>
+        <li><a href="/content/">📰 Читати контент</a></li>
+        {% if subscription and subscription.is_active %}
+            <li>✅ У тебе активна підписка <strong>{{ subscription.plan|title }}</strong> до {{ subscription.end_date|date:"d.m.Y" }}</li>
+        {% else %}
+            <li>⚠️ У тебе немає активної підписки</li>
+            <li><a href="{% url 'checkout' %}">💳 Оформити підписку на платний контент</a></li>
+        {% endif %}
+        <li><a href="{% url 'weather' %}">⛅ Погода</a></li>
+        <li><a href="{% url 'account_logout' %}">🚪 Вийти</a></li>
+    </ul>
+</body>
+</html>

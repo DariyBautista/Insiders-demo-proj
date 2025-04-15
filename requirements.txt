@@ -1,0 +1,9 @@
+Django>=4.2
+djangorestframework
+dj-rest-auth
+django-allauth
+stripe
+requests
+python-decouple
+psycopg2-binary
+PyJWT>=2.0.0

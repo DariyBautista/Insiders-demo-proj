@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Premium Newsletter{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Головна</a></li>
+                <li><a href="/accounts/dashboard">Кабінет</a></li>
+                <li><a href="/content/">Контент</a></li>
+                {% if subscription and subscription.is_active %}
+                    <li>✅ У тебе активна підписка <strong>{{ subscription.plan|title }}</strong> до {{ subscription.end_date|date:"d.m.Y" }}</li>
+                {% else %}
+                    <li>⚠️ У тебе немає активної підписки</li>
+                    <li><a href="{% url 'checkout' %}">💳 Оформити підписку на платний контент</a></li>
+                {% endif %}
+                <li><a href="/mailer/">📰 Підписатись на новини</a></li>
+                <li><a href="{% url 'weather' %}">⛅ Погода</a></li>
+                <li><a href="{% url 'account_logout' %}">🚪 Вийти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Premium Newsletter</p>
+    </footer>
+</body>
+</html>

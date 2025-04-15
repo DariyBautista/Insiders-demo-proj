@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Безкоштовний контент</h2>
+  {% for post in posts %}
+    <div>
+      <h3><a href="{% url 'content:post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+      <p>{{ post.content|truncatewords:30 }}</p>
+      <small>Автор: {{ post.author }} | {{ post.created_at }}</small>
+        <p>
+            {% if post.access_level == 'free' %}
+            🔓 Free
+            {% else %}
+            🔒 Premium
+            {% endif %}
+        </p>
+    </div>
+    <hr>
+  {% empty %}
+    <p>Контенту поки немає.</p>
+  {% endfor %}
+{% endblock %}
