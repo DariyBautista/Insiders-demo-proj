@@ -54,6 +54,33 @@ MAILCHIMP_TRANSACTIONAL_API_KEY=
 EMAIL_HOST_USER=
 EMAIL_HOST_PASSWORD=
 ```
+---
+
+## 🔧 Налаштування Google OAuth
+
+Для того щоб авторизація через Google працювала, потрібно:
+
+1. Перейти до [Google Cloud Console](https://console.cloud.google.com/)
+2. Створити новий проект або використати існуючий
+3. Перейти в **APIs & Services > Credentials**
+4. Створити нові **OAuth 2.0 Client IDs**
+   - Вибрати **Web application**
+   - Додати `http://localhost:8000/accounts/google/login/callback/` до **Authorized redirect URIs**
+5. Скопіювати `Client ID` та `Client Secret`
+
+Після цього:
+
+- Додайте Google як соціальний провайдер в Django Admin:
+  - Перейдіть до `/admin/socialaccount/socialapp/`
+  - Створіть новий запис:
+    - Provider: `Google`
+    - Name: будь-яке ім’я (наприклад, `Google Login`)
+    - Client id: (ваш Client ID)
+    - Secret key: (ваш Client Secret)
+    - Sites: додайте свій сайт (наприклад, `example.com` або `localhost:8000`)
+  
+> Після цього користувачі зможуть входити через свої Google акаунти на сторінці логіну `/accounts/login/`
+
 ## 📌 Основні ендпоїнти
 
 ---
